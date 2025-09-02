@@ -1,0 +1,17 @@
+services:
+  # Next.js Application
+  meet-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      # You'll need to provide your own LiveKit server URL
+      - LIVEKIT_API_KEY=${LIVEKIT_API_KEY}
+      - LIVEKIT_API_SECRET=${LIVEKIT_API_SECRET}
+      - LIVEKIT_URL=${LIVEKIT_URL}
+      - NEXT_PUBLIC_SHOW_SETTINGS_MENU=${NEXT_PUBLIC_SHOW_SETTINGS_MENU:-true}
+      - NEXT_PUBLIC_LK_RECORD_ENDPOINT=${NEXT_PUBLIC_LK_RECORD_ENDPOINT:-/api/record}
+    restart: unless-stopped
